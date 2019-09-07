@@ -8,22 +8,6 @@ let geojson = """
 {
   "type": "FeatureCollection",
   "features": [{
-      "type": "Feature",
-      "geometry": {
-          "type": "Point",
-          "coordinates": [
-              13.7383200,
-              51.0508900
-          ]
-      },
-      "properties": {
-          "name": "Dresden",
-          "type": "city",
-          "url": "https://www.dresden.de/parken",
-          "source": "https://apps.dresden.de/ords/f?p=1110",
-      "active_support": true
-      }
-  }, {
     "type": "Feature",
     "geometry": {
       "type": "Point",
@@ -32,7 +16,7 @@ let geojson = """
     "properties": {
       "name": "Terrassenufer Bus",
       "address": "Terrassenufer",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -43,7 +27,7 @@ let geojson = """
     "properties": {
       "name": "Prohlis",
       "address": "Langer Weg",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 67,
       "aux": 359
     }
@@ -56,7 +40,7 @@ let geojson = """
     "properties": {
       "name": "Flutrinne",
       "address": "Messering",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 1200,
       "aux": 419
     }
@@ -69,7 +53,7 @@ let geojson = """
     "properties": {
       "name": "Haus am Zwinger",
       "address": "Kleine Brüdergasse 3",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 171,
       "aux": 294
     }
@@ -82,7 +66,7 @@ let geojson = """
     "properties": {
       "name": "Centrum - Galerie",
       "address": "Reitbahnstraße",
-      "type": "Parkhaus",
+      "type": "structure",
       "total": 1059,
       "aux": 301
     }
@@ -95,7 +79,7 @@ let geojson = """
     "properties": {
       "name": "Centrum Galerie",
       "address": "Reitbahnstraße",
-      "type": "Parkhaus",
+      "type": "structure",
       "total": 1059,
       "aux": 301
     }
@@ -108,7 +92,7 @@ let geojson = """
     "properties": {
       "name": "Wöhrl / Florentinum",
       "address": "Prager Straße 8 - 10",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 264,
       "aux": 297
     }
@@ -121,7 +105,7 @@ let geojson = """
     "properties": {
       "name": "Wöhrl - Florentinum",
       "address": "Prager Straße 8 - 10",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 264,
       "aux": 297
     }
@@ -134,7 +118,7 @@ let geojson = """
     "properties": {
       "name": "Bahnhof Neustadt",
       "address": "Schlesischer Platz",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -145,7 +129,7 @@ let geojson = """
     "properties": {
       "name": "Semperoper",
       "address": "Devrientstraße",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 400,
       "aux": 300
     }
@@ -158,7 +142,7 @@ let geojson = """
     "properties": {
       "name": "Reitbahnstraße",
       "address": "Reitbahnstraße",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 285,
       "aux": 307
     }
@@ -171,7 +155,7 @@ let geojson = """
     "properties": {
       "name": "Taschenbergpalais",
       "address": "Kleine Brüdergasse",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 98,
       "aux": 293
     }
@@ -184,7 +168,7 @@ let geojson = """
     "properties": {
       "name": "Palaisplatz",
       "address": "Palaisplatz",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -195,7 +179,7 @@ let geojson = """
     "properties": {
       "name": "Schießgasse",
       "address": "Schießgasse",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 255,
       "aux":304
     }
@@ -208,7 +192,7 @@ let geojson = """
     "properties": {
       "name": "Lindengasse",
       "address": "Lindengasse",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 75,
       "aux": 306
     }
@@ -221,7 +205,7 @@ let geojson = """
     "properties": {
       "name": "Wiener Platz / Hbf.",
       "address": "Wiener Platz",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 350,
       "aux": 357
     }
@@ -234,7 +218,7 @@ let geojson = """
     "properties": {
       "name": "Pirnaischer Platz",
       "address": "Pirnaischer Platz",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 156,
       "aux": 305
     }
@@ -247,7 +231,7 @@ let geojson = """
     "properties": {
       "name": "An der Frauenkirche",
       "address": "An der Frauenkirche 12a",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 120,
       "aux": 295
     }
@@ -260,7 +244,7 @@ let geojson = """
     "properties": {
       "name": "Pennrich",
       "address": "Oskar-Maune-Straße",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -271,7 +255,7 @@ let geojson = """
     "properties": {
       "name": "Cossebaude",
       "address": "Bahnhofstraße Cossebaude",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 38,
       "aux": 1175
     }
@@ -284,7 +268,7 @@ let geojson = """
     "properties": {
       "name": "Bühlau",
       "address": "Quohrener Straße",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 1,
       "aux": 358
     }
@@ -297,7 +281,7 @@ let geojson = """
     "properties": {
       "name": "Kaditz",
       "address": "Kötschenbroder Str.",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 190,
       "aux": 675
     }
@@ -310,7 +294,7 @@ let geojson = """
     "properties": {
       "name": "Hauptstraße",
       "address": "Metzer Straße",
-      "type": "Parkhaus",
+      "type": "structure",
       "total": 150,
       "aux": 633
     }
@@ -323,7 +307,7 @@ let geojson = """
     "properties": {
       "name": "Ferdinandplatz",
       "address": "Ferdinandplatz",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 140,
       "aux": 632
     }
@@ -336,7 +320,7 @@ let geojson = """
     "properties": {
       "name": "Wigardstraße",
       "address": "Wigardstraße",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -347,7 +331,7 @@ let geojson = """
     "properties": {
       "name": "Ostra-Allee",
       "address": "Ostra-Allee",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -358,7 +342,7 @@ let geojson = """
     "properties": {
       "name": "Kongresszentrum",
       "address": "Ostra-Ufer 2",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 250,
       "aux": 424
     }
@@ -371,7 +355,7 @@ let geojson = """
     "properties": {
         "name": "Ostra-Ufer",
         "address": "Ostra-Ufer",
-        "type": "Parkplatz"
+        "type": "lot"
     }
   },{
     "type": "Feature",
@@ -382,7 +366,7 @@ let geojson = """
     "properties": {
       "name": "Lingnerallee",
       "address": "Lingnerallee",
-      "Lingnerallee": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -393,7 +377,7 @@ let geojson = """
     "properties": {
       "name": "Theresienstraße",
       "address": "Theresienstraße 15",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 140,
       "aux": 303
     }
@@ -406,7 +390,8 @@ let geojson = """
     "properties": {
       "name": "Altmarkt",
       "address": "Wilsdruffer Straße",
-      "type": "Tiefgarage",
+      "type": "underground",
+      "region": "Innere Altstadt",
       "total": 400,
       "aux": 1101
     }
@@ -419,7 +404,7 @@ let geojson = """
     "properties": {
       "name": "Sarrasanistraße",
       "address": "Sarrasanistraße",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 55,
       "aux": 932
     }
@@ -432,7 +417,7 @@ let geojson = """
     "properties": {
       "name": "Frauenkirche / Neumarkt",
       "address": "Landhausstraße 2",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 250,
       "aux": 490
     }
@@ -445,7 +430,7 @@ let geojson = """
     "properties": {
       "name": "Frauenkirche Neumarkt",
       "address": "Landhausstraße 2",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 250,
       "aux": 490
     }
@@ -458,7 +443,7 @@ let geojson = """
     "properties": {
       "name": "Parkhaus Mitte",
       "address": "Magdeburger Str. 1",
-      "type": "Parkhaus",
+      "type": "structure",
       "total": 280,
       "aux": 931
     }
@@ -471,7 +456,7 @@ let geojson = """
     "properties": {
       "name": "Karstadt",
       "address": "Prager Straße 12",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 265,
       "aux": 296
     }
@@ -484,7 +469,7 @@ let geojson = """
     "properties": {
       "name": "Messegelände",
       "address": "Messering 6",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 754,
       "aux": 360
     }
@@ -497,7 +482,7 @@ let geojson = """
     "properties": {
       "name": "Langebrück",
       "address": "Güterbahnhofstraße Langebrück",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 50,
       "aux": 1176
     }
@@ -510,7 +495,7 @@ let geojson = """
     "properties": {
       "name": "Altmarkt - Galerie",
       "address": "Webergasse 1",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 480,
       "aux": 319
     }
@@ -523,7 +508,7 @@ let geojson = """
     "properties": {
       "name": "Zinzendorfstraße",
       "address": "Zinzendorfstraße",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -534,7 +519,7 @@ let geojson = """
     "properties": {
       "name": "Terrassenufer",
       "address": "Terrassenufer",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 69,
       "aux": 308
     }
@@ -547,7 +532,7 @@ let geojson = """
     "properties": {
       "name": "Pirnaische Straße",
       "address": "Pirnaische Straße",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -558,7 +543,7 @@ let geojson = """
     "properties": {
       "name": "Blüherstraße",
       "address": "Blüherstraße",
-      "type": "Parkplatz"
+      "type": "lot"
     }
   }, {
     "type": "Feature",
@@ -569,7 +554,7 @@ let geojson = """
     "properties": {
       "name": "City Center",
       "address": "Friedrich-List-Platz 2",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 350,
       "aux": 298
     }
@@ -582,7 +567,7 @@ let geojson = """
     "properties": {
       "name": "Wiesentorstraße",
       "address": "Wiesentorstraße",
-      "type": "Parkplatz",
+      "type": "lot",
       "total": 120,
       "aux": 302
     }
@@ -595,7 +580,7 @@ let geojson = """
     "properties": {
       "name": "World Trade Center",
       "address": "Ammonstraße 70",
-      "type": "Tiefgarage",
+      "type": "underground",
       "total": 220,
       "aux": 299
     }
@@ -607,7 +592,7 @@ let geojson = """
     },
     "properties":{
       "name": "Gompitz",
-      "type": "Parkplatz",
+      "type": "lot",
       "address": "Gompitzer Höhe",
       "total": 50,
       "aux": 1095
@@ -620,7 +605,7 @@ let geojson = """
     },
     "properties":{
       "name": "Klotzsche",
-      "type": "Parkplatz",
+      "type": "lot",
       "address": "Zur Neuen Brücke"
     }
   }, {
@@ -631,7 +616,7 @@ let geojson = """
     },
     "properties":{
       "name": "Reick",
-      "type": "Parkplatz",
+      "type": "lot",
       "address": "Lohrmannstraße"
     }
   }, {
@@ -642,7 +627,7 @@ let geojson = """
     },
     "properties":{
       "name": "Wiener Platz / Hauptbahnhof",
-      "type": "Tiefgarage",
+      "type": "underground",
       "address": "Wiener Platz",
       "total": 200,
       "aux": 356
@@ -656,7 +641,7 @@ let geojson = """
     },
     "properties":{
       "name": "Freiberger Platz",
-      "type": "Parkplatz",
+      "type": "lot",
       "address": "Freiberger Platz"
     }
   },
@@ -668,7 +653,7 @@ let geojson = """
     },
     "properties":{
       "name": "Strehlener Straße",
-      "type": "Parkplatz",
+      "type": "lot",
       "address": "Strehlener Straße 27"
     }
   },
@@ -680,7 +665,7 @@ let geojson = """
     },
     "properties":{
       "name": "SP1 Straßburger Platz",
-      "type": "Parkhaus",
+      "type": "structure",
       "address": "Straßburger Platz 1"
     }
   }, {
@@ -691,7 +676,7 @@ let geojson = """
     },
     "properties": {
         "name": "Kraftwerk Mitte",
-        "type": "Parkplatz",
+        "type": "lot",
         "address": "Löbtauer Straße 21"
     }
   }, {
@@ -702,7 +687,7 @@ let geojson = """
     },
     "properties": {
         "name": "Budapester Straße",
-        "type": "Parkplatz",
+        "type": "lot",
         "address": "Budapester Straße"
     }
   }, {
@@ -713,7 +698,7 @@ let geojson = """
     },
     "properties": {
         "name": "Weixdorf Bad",
-        "type": "Parkplatz",
+        "type": "lot",
         "address": "Platz des Friedens"
     }
   }, {
@@ -724,8 +709,19 @@ let geojson = """
     },
     "properties": {
         "name": "Weißig",
-        "type": "Parkplatz",
+        "type": "lot",
         "address": "Bautzner Landstraße"
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [13.8852734, 51.0612682]
+    },
+    "properties": {
+        "name": "Messe",
+        "type": "lot",
+        "address": "Messering 6"
     }
   }]
 }
