@@ -3,10 +3,23 @@ import XCTest
 
 final class OpenParkingDresdenTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(OpenParkingDresden().text, "Hello, World!")
+        let e = expectation(description: "get data")
+
+        Dresden().data { result in
+            switch result {
+            case .failure(let error):
+                XCTFail("Failed with error: \(error)")
+                e.fulfill()
+            case .success(let datapoint):
+                XCTAssert(!datapoint.lots.isEmpty)
+                for lot in datapoint.lots {
+                    print(lot)
+                }
+                e.fulfill()
+            }
+        }
+
+        waitForExpectations(timeout: 5)
     }
 
     static var allTests = [
