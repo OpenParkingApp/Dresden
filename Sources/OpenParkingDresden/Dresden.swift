@@ -7,31 +7,13 @@ public class Dresden: Datasource {
     public let slug = "dresden"
     public let infoUrl = URL(string: "https://www.dresden.de/parken")!
 
-    public var attribution: Attribution? = nil
-
     let sourceURL = URL(string: "https://apps.dresden.de/ords/f?p=1110")!
 
-    public func data(completion: @escaping (Result<DataPoint, OpenParkingError>) -> Void) {
-        get(url: self.sourceURL) { result in
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
-            case .success(let (data, _)):
-                guard let html = String(data: data, encoding: .utf8) else {
-                    completion(.failure(.decoding(description: "Failed to decode html", underlyingError: nil)))
-                    return
-                }
-                do {
-                    let datapoint = try self.parse(html: html)
-                    completion(.success(datapoint))
-                } catch {
-                    completion(.failure(.decoding(description: "SwiftSoup error", underlyingError: error)))
-                }
-            }
+    public func data() throws -> DataPoint {
+        let (data, _) = try get(url: self.sourceURL)
+        guard let html = String(data: data, encoding: .utf8) else {
+            throw OpenParkingError.decoding(description: "Failed to decode HTML", underlyingError: nil)
         }
-    }
-
-    public func parse(html: String) throws -> DataPoint {
         let doc = try SwiftSoup.parse(html)
         let dateSource = try doc.getElementById("P1_LAST_UPDATE")?.text().date(withFormat: .ddMMyyyy_HHmmss)
 
@@ -58,20 +40,35 @@ public class Dresden: Datasource {
         }
 
         let lotName = try row.select("td[headers=BEZEICHNUNG]").text()
+        guard let metadata = geodata.lot(withName: lotName) else {
+            throw OpenParkingError.missingMetadata(lot: lotName)
+        }
+
         let free = try row.select("td[headers=FREI]").int(else: 0)
-        // TODO: Get fallback from geodata instead.
-        // Or maybe put that and coordinate lookup into Lot initializer when params are nil?
-        let total = try row.select("td[headers=KAPAZITAET]").int()
+        let total = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
+
+        guard let coordinate = metadata.coordinate else {
+            throw OpenParkingError.missingMetadataField("coordinate", lot: lotName)
+        }
+
+        guard let typeStr: String = metadata["type"] else {
+            throw OpenParkingError.missingMetadataField("type", lot: lotName)
+            // TODO: Does this make sense? This currently breaks off loading of lots and throws the error instead.
+            // Wouldn't it make more sense to skip this particular lot, but still load all others?
+            // The error in itself is definitely worth the information though, don't want to swallow that. But how to report it?
+            // Best thing I can come up with is refactoring DataPoint to not only store lots in its attribute, but lots and specifically these errors.
+        }
+        let lotKind = Lot.Kind(rawValue: typeStr)
 
         return Lot(name: lotName,
-                   coordinates: Coordinates(lat: 1.0, lng: 1.0),
+                   coordinates: coordinate,
                    city: "Dresden",
-                   region: nil,
-                   address: nil,
+                   region: metadata["region"],
+                   address: metadata["address"],
                    free: .discrete(free),
                    total: total,
                    state: lotState,
-                   type: nil,
+                   kind: lotKind,
                    detailURL: nil)
     }
 }
