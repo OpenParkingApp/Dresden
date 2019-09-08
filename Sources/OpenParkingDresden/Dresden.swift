@@ -17,18 +17,20 @@ public class Dresden: Datasource {
             throw OpenParkingError.decoding(description: "Failed to decode HTML", underlyingError: nil)
         }
         let doc = try SwiftSoup.parse(html)
-        let dateSource = try doc.getElementById("P1_LAST_UPDATE")?.text().date(withFormat: .ddMMyyyy_HHmmss)
+        guard let dateSource = try doc.getElementById("P1_LAST_UPDATE")?.text().date(withFormat: .ddMMyyyy_HHmmss) else {
+            throw OpenParkingError.decoding(description: "Missing date", underlyingError: nil)
+        }
 
         // Select all tables that have a summary field set (a region identifier).
         let lots = try doc.select("table[summary~=.+]")
             .filter { try $0.attr("summary") != "Busparkplätze" }
-            .map { try $0.select("tr").compactMap(extract(lotFrom:)) }
+            .map { reg in try reg.select("tr").compactMap { try extract(lotFrom: $0, region: try reg.attr("summary"), dateSource: dateSource) } }
             .flatMap { $0 }
 
-        return DataPoint(dateSource: dateSource, lots: lots)
+        return DataPoint(lots: lots)
     }
 
-    private func extract(lotFrom row: Element) throws -> Lot? {
+    private func extract(lotFrom row: Element, region: String, dateSource: Date) throws -> Lot? {
         // Ignore section headers.
         guard try row.select("th").isEmpty() else { return nil }
 
@@ -62,10 +64,11 @@ public class Dresden: Datasource {
         }
         let lotKind = Lot.Kind(rawValue: typeStr)
 
-        return Lot(name: lotName,
+        return Lot(dataAge: dateSource,
+                   name: lotName,
                    coordinates: coordinate,
                    city: "Dresden",
-                   region: metadata["region"],
+                   region: region,
                    address: metadata["address"],
                    free: .discrete(free),
                    total: total,

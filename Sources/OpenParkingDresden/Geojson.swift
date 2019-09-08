@@ -391,7 +391,6 @@ let geojson = """
       "name": "Altmarkt",
       "address": "Wilsdruffer Straße",
       "type": "underground",
-      "region": "Innere Altstadt",
       "total": 400,
       "aux": 1101
     }
