@@ -9,6 +9,8 @@ public class Dresden: Datasource {
 
     let sourceURL = URL(string: "https://apps.dresden.de/ords/f?p=1110")!
 
+    public init() {}
+
     public func data() throws -> DataPoint {
         let (data, _) = try get(url: self.sourceURL)
         guard let html = String(data: data, encoding: .utf8) else {

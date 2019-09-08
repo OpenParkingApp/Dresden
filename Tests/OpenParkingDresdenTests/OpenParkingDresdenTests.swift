@@ -1,5 +1,5 @@
 import XCTest
-@testable import OpenParkingDresden
+import OpenParkingDresden
 
 final class OpenParkingDresdenTests: XCTestCase {
     func testExample() throws {
