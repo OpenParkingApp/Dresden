@@ -1,17 +1,13 @@
 import XCTest
 import OpenParkingDresden
+import OpenParkingTests
 
 final class OpenParkingDresdenTests: XCTestCase {
-    func testExample() throws {
-        let data = try Dresden().data()
-        XCTAssert(!data.lots.isEmpty)
-
-        for lot in data.lots {
-            print(lot)
-        }
+    func testDatasource() throws {
+        assert(datasource: Dresden())
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testDatasource", testDatasource),
     ]
 }

@@ -25,6 +25,6 @@ let package = Package(
             dependencies: ["OpenParkingBase", "SwiftSoup"]),
         .testTarget(
             name: "OpenParkingDresdenTests",
-            dependencies: ["OpenParkingDresden"]),
+            dependencies: ["OpenParkingTests", "OpenParkingDresden"]),
     ]
 )
