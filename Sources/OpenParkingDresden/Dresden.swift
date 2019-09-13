@@ -48,8 +48,8 @@ public class Dresden: Datasource {
             throw OpenParkingError.missingMetadata(lot: lotName)
         }
 
-        let free = try row.select("td[headers=FREI]").int(else: 0)
-        let total = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
+        let available = try row.select("td[headers=FREI]").int(else: 0)
+        let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
 
         guard let coordinate = metadata.coordinate else {
             throw OpenParkingError.missingMetadataField("coordinate", lot: lotName)
@@ -70,8 +70,8 @@ public class Dresden: Datasource {
                    city: "Dresden",
                    region: region,
                    address: metadata["address"],
-                   free: .discrete(free),
-                   total: total,
+                   available: .discrete(available),
+                   capacity: capacity,
                    state: lotState,
                    kind: lotKind,
                    detailURL: nil)
