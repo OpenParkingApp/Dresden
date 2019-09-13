@@ -64,11 +64,7 @@ public class Dresden: Datasource {
         }
 
         guard let typeStr: String = metadata["type"] else {
-            throw OpenParkingError.missingMetadataField("type", lot: lotName)
-            // TODO: Does this make sense? This currently breaks off loading of lots and throws the error instead.
-            // Wouldn't it make more sense to skip this particular lot, but still load all others?
-            // The error in itself is definitely worth the information though, don't want to swallow that. But how to report it?
-            // Best thing I can come up with is refactoring DataPoint to not only store lots in its attribute, but lots and specifically these errors.
+            return .failure(.missingMetadataField("type", lot: lotName))
         }
         let lotKind = Lot.Kind(rawValue: typeStr)
 
