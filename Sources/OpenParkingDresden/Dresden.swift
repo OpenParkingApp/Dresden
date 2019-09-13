@@ -30,7 +30,7 @@ public class Dresden: Datasource {
         return DataPoint(lots: lots)
     }
 
-    private func extract(lotFrom row: Element, region: String, dateSource: Date) throws -> Lot? {
+    private func extract(lotFrom row: Element, region: String, dateSource: Date) throws -> LotResult? {
         // Ignore section headers.
         guard try row.select("th").isEmpty() else { return nil }
 
@@ -45,14 +45,14 @@ public class Dresden: Datasource {
 
         let lotName = try row.select("td[headers=BEZEICHNUNG]").text()
         guard let metadata = geodata.lot(withName: lotName) else {
-            throw OpenParkingError.missingMetadata(lot: lotName)
+            return .failure(.missingMetadata(lot: lotName))
         }
 
         let available = try row.select("td[headers=FREI]").int(else: 0)
         let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
 
         guard let coordinate = metadata.coordinate else {
-            throw OpenParkingError.missingMetadataField("coordinate", lot: lotName)
+            return .failure(.missingMetadataField("coordinate", lot: lotName))
         }
 
         guard let typeStr: String = metadata["type"] else {
@@ -64,16 +64,16 @@ public class Dresden: Datasource {
         }
         let lotKind = Lot.Kind(rawValue: typeStr)
 
-        return Lot(dataAge: dateSource,
-                   name: lotName,
-                   coordinates: coordinate,
-                   city: "Dresden",
-                   region: region,
-                   address: metadata["address"],
-                   available: .discrete(available),
-                   capacity: capacity,
-                   state: lotState,
-                   kind: lotKind,
-                   detailURL: nil)
+        return .success(Lot(dataAge: dateSource,
+                            name: lotName,
+                            coordinates: coordinate,
+                            city: "Dresden",
+                            region: region,
+                            address: metadata["address"],
+                            available: .discrete(available),
+                            capacity: capacity,
+                            state: lotState,
+                            kind: lotKind,
+                            detailURL: nil))
     }
 }
