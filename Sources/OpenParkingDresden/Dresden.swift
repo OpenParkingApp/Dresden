@@ -55,8 +55,10 @@ public class Dresden: Datasource {
         // Several lots routinely report more available spots than there are, I'm guessing
         // it's a time based thing where more spots are made available. Let's just fall
         // back to the available spots in that case instead.
+        var warning: String? = nil
         if let cap = capacity, cap < available {
             capacity = available
+            warning = "Capacity = \(cap), but found \(available) spots available."
         }
 
         guard let coordinate = metadata.coordinate else {
@@ -66,7 +68,7 @@ public class Dresden: Datasource {
         guard let typeStr: String = metadata["type"] else {
             return .failure(.missingMetadataField("type", lot: lotName))
         }
-        let lotKind = Lot.Kind(rawValue: typeStr)
+        let type = Lot.LotType(rawValue: typeStr)
 
         return .success(Lot(dataAge: dateSource,
                             name: lotName,
@@ -77,7 +79,8 @@ public class Dresden: Datasource {
                             available: .discrete(available),
                             capacity: capacity,
                             state: lotState,
-                            kind: lotKind,
-                            detailURL: nil))
+                            type: type,
+                            detailURL: nil,
+                            warning: warning))
     }
 }
