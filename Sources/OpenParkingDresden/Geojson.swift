@@ -1,8 +1,10 @@
 // This is a workaround until Swift packages properly support resources.
+// swiftlint:disable file_length
 
 import OpenParkingBase
 import Foundation
 
+// swiftlint:disable:next force_try
 let geodata = try! JSONDecoder().decode(GeoJson.self, from: geojson.data(using: .utf8)!)
 let geojson = """
 {

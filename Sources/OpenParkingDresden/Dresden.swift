@@ -17,14 +17,21 @@ public class Dresden: Datasource {
             throw OpenParkingError.decoding(description: "Failed to decode HTML", underlyingError: nil)
         }
         let doc = try SwiftSoup.parse(html)
-        guard let dateSource = try doc.getElementById("P1_LAST_UPDATE")?.text().date(withFormat: .ddMMyyyy_HHmmss) else {
+        guard let dateSource = try doc.getElementById("P1_LAST_UPDATE")?
+            .text()
+            .date(withFormat: .ddMMyyyy_HHmmss)
+        else {
             throw OpenParkingError.decoding(description: "Missing date", underlyingError: nil)
         }
 
         // Select all tables that have a summary field set (a region identifier).
         let lots = try doc.select("table[summary~=.+]")
             .filter { try $0.attr("summary") != "Busparkplätze" }
-            .map { reg in try reg.select("tr").compactMap { try extract(lotFrom: $0, region: try reg.attr("summary"), dateSource: dateSource) } }
+            .map { region in
+                try region.select("tr").compactMap {
+                    try extract(lotFrom: $0, region: try region.attr("summary"), dateSource: dateSource)
+                }
+            }
             .flatMap { $0 }
 
         return DataPoint(lots: lots)
@@ -55,7 +62,7 @@ public class Dresden: Datasource {
         // Several lots routinely report more available spots than there are, I'm guessing
         // it's a time based thing where more spots are made available. Let's just fall
         // back to the available spots in that case instead.
-        var warning: String? = nil
+        var warning: String?
         if let cap = capacity, cap < available {
             capacity = available
             warning = "Capacity = \(cap), but found \(available) spots available."
