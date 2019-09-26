@@ -77,6 +77,9 @@ public class Dresden: Datasource {
         }
         let type = Lot.LotType(rawValue: typeStr)
 
+        let detailURLStr = try row.select("a").attr("href")
+        let detailURL = URL(string: "https://apps.dresden.de/ords/\(detailURLStr)")
+
         return .success(Lot(dataAge: dateSource,
                             name: lotName,
                             coordinates: coordinate,
@@ -87,7 +90,7 @@ public class Dresden: Datasource {
                             capacity: capacity,
                             state: lotState,
                             type: type,
-                            detailURL: nil,
+                            detailURL: detailURL,
                             paymentInfo: Lot.PaymentInfo(url: URL(string: "https://www.dresden.de/apps_ext/HandyParkenApp_de/bookings/booking")!),
                             warning: warning))
     }
