@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.2
 
 import PackageDescription
 
@@ -19,6 +19,9 @@ let package = Package(
             dependencies: ["OpenParkingBase", "SwiftSoup"]),
         .testTarget(
             name: "OpenParkingDresdenTests",
-            dependencies: ["OpenParkingTests", "OpenParkingDresden"]),
+            dependencies: [
+                "OpenParkingDresden",
+                .product(name: "OpenParkingTests", package: "OpenParkingBase"),
+            ]),
     ]
 )
