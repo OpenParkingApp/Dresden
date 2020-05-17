@@ -1,0 +1,13 @@
+name: Cron
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+
+jobs:
+  test_datasource:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test Datasource
+      run: swift test
