@@ -10,7 +10,7 @@ let package = Package(
             targets: ["OpenParkingDresden"]),
     ],
     dependencies: [
-        .package(path: "../OpenParkingBase"),
+        .package(url: "https://github.com/OpenParkingApp/OpenParkingBase.git", .upToNextMinor(from: "0.3.0")),
         .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.2.0"),
     ],
     targets: [

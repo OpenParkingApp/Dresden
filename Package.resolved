@@ -20,6 +20,15 @@
         }
       },
       {
+        "package": "OpenParkingBase",
+        "repositoryURL": "https://github.com/OpenParkingApp/OpenParkingBase.git",
+        "state": {
+          "branch": null,
+          "revision": "b80585775abbabbac088c2540d766449c934a3ec",
+          "version": "0.3.0"
+        }
+      },
+      {
         "package": "SwiftSoup",
         "repositoryURL": "https://github.com/scinfu/SwiftSoup",
         "state": {
