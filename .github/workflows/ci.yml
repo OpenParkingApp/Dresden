@@ -3,9 +3,34 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  test_datasource:
+  linux:
+    strategy:
+      matrix:
+        image:
+          - "swift:5.2"
+          - "swift:nightly"
+    name: linux
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Version
+      run: swift --version
+    - name: Build
+      run: swift build --verbose --configuration debug
+    - name: Test
+      run: swift test --verbose --configuration debug
+
+  macos:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Test Datasource
-      run: swift test
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Version
+      run: swift --version
+    - name: Build
+      run: swift build --verbose --configuration debug
+    - name: Test
+      run: swift test --verbose --configuration debug
