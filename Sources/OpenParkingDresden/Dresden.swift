@@ -94,7 +94,7 @@ public class Dresden: Datasource {
                             type: type,
                             detailURL: detailURL,
                             imageURL: imageURL,
-                            paymentInfo: Lot.PaymentInfo(url: URL(string: "https://www.dresden.de/apps_ext/HandyParkenApp_de/bookings/booking")!),
+                            pricing: Lot.Pricing(url: URL(string: "https://www.dresden.de/apps_ext/HandyParkenApp_de/bookings/booking")!),
                             warning: warning))
     }
 }
