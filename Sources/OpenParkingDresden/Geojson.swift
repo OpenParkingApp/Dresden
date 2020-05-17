@@ -724,6 +724,17 @@ let geojson = """
         "type": "lot",
         "address": "Messering 6"
     }
+  }, {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [13.8142229, 51.051626]
+    },
+    "properties": {
+        "name": "Fidelio-F.-Finke-Straße",
+        "type": "lot",
+        "address": "Fidelio-F.-Finke-Straße"
+    }
   }]
 }
 """
