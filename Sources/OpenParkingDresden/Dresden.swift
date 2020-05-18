@@ -64,7 +64,7 @@ public class Dresden: Datasource {
         // back to the available spots in that case instead.
         if let cap = capacity, cap < available {
             capacity = available
-            warn("Capacity = \(cap), but found \(available) spots available.", lotName: lotName, lotCity: "Dresden")
+            warn("Capacity = \(cap), but found \(available) spots available.", lotName: lotName)
         }
 
         guard let coordinate = metadata.coordinate else {

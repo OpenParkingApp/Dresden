@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/OpenParkingApp/OpenParkingBase.git",
         "state": {
           "branch": null,
-          "revision": "c38de786f4186592b95238cce8abdba989e04e69",
-          "version": "0.4.1"
+          "revision": "72aa547f46a88feb07ac8288cef39630ff2e9fed",
+          "version": "0.5.0"
         }
       },
       {
