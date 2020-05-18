@@ -62,10 +62,9 @@ public class Dresden: Datasource {
         // Several lots routinely report more available spots than there are, I'm guessing
         // it's a time based thing where more spots are made available. Let's just fall
         // back to the available spots in that case instead.
-        var warning: String?
         if let cap = capacity, cap < available {
             capacity = available
-            warning = "Capacity = \(cap), but found \(available) spots available."
+            warn("Capacity = \(cap), but found \(available) spots available.", lotName: lotName, lotCity: "Dresden")
         }
 
         guard let coordinate = metadata.coordinate else {
@@ -94,7 +93,6 @@ public class Dresden: Datasource {
                             type: type,
                             detailURL: detailURL,
                             imageURL: imageURL,
-                            pricing: Lot.Pricing(url: URL(string: "https://www.dresden.de/apps_ext/HandyParkenApp_de/bookings/booking")!),
-                            warning: warning))
+                            pricing: Lot.Pricing(url: URL(string: "https://www.dresden.de/apps_ext/HandyParkenApp_de/bookings/booking")!)))
     }
 }
