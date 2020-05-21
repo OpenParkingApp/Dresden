@@ -56,16 +56,7 @@ public class Dresden: Datasource {
         }
 
         let available = try row.select("td[headers=FREI]").int(else: 0)
-
-        var capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
-
-        // Several lots routinely report more available spots than there are, I'm guessing
-        // it's a time based thing where more spots are made available. Let's just fall
-        // back to the available spots in that case instead.
-        if let cap = capacity, cap < available {
-            capacity = available
-            warn("Capacity = \(cap), but found \(available) spots available.", lotName: lotName)
-        }
+        let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
 
         guard let coordinate = metadata.coordinate else {
             return .failure(.missingMetadataField("coordinate", lot: lotName))

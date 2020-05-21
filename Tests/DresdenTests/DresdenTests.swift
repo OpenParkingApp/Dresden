@@ -4,6 +4,6 @@ import DatasourceValidation
 
 final class DresdenTests: XCTestCase {
     func testDatasource() throws {
-        validate(datasource: Dresden())
+        validate(datasource: Dresden(), ignoreExceededCapacity: true)
     }
 }
