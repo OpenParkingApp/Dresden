@@ -56,34 +56,32 @@ public class Dresden: Datasource {
         }
 
         let available = try row.select("td[headers=FREI]").int(else: 0)
-        let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
+        let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata.total
 
         guard let coordinates = metadata.coordinates else {
             return .failure(.missingMetadataField("coordinates", lot: lotName))
         }
 
-        guard let typeStr: String = metadata["type"] else {
-            return .failure(.missingMetadataField("type", lot: lotName))
+        let typeStr: String = try metadata.value(for: "type")
+        guard let type = Lot.LotType(rawValue: typeStr) else {
+            throw LotError.other(reason: "Unknown lot type: \(typeStr)")
         }
-        let type = Lot.LotType(rawValue: typeStr)
 
         let detailURLStr = try row.select("a").attr("href")
         let detailURL = URL(string: "https://apps.dresden.de/ords/\(detailURLStr)")
 
-        let imageURL: URL? = metadata["image_url"]
-
         return .success(Lot(dataAge: dateSource,
                             name: lotName,
-                            city: "Dresden",
                             coordinates: coordinates,
+                            city: self.name,
                             region: region,
-                            address: metadata["address"],
+                            address: metadata.address,
                             available: .discrete(available),
                             capacity: capacity,
                             state: lotState,
                             type: type,
                             detailURL: detailURL,
-                            imageURL: imageURL,
+                            imageURL: try? metadata.urlValue(for: "image_url"),
                             pricing: Lot.Pricing(url: URL(string: "https://www.dresden.de/apps_ext/HandyParkenApp_de/bookings/booking")!)))
     }
 }
