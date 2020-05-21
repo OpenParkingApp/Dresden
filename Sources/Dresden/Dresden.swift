@@ -58,8 +58,8 @@ public class Dresden: Datasource {
         let available = try row.select("td[headers=FREI]").int(else: 0)
         let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata["total"]
 
-        guard let coordinate = metadata.coordinate else {
-            return .failure(.missingMetadataField("coordinate", lot: lotName))
+        guard let coordinates = metadata.coordinates else {
+            return .failure(.missingMetadataField("coordinates", lot: lotName))
         }
 
         guard let typeStr: String = metadata["type"] else {
@@ -74,8 +74,8 @@ public class Dresden: Datasource {
 
         return .success(Lot(dataAge: dateSource,
                             name: lotName,
-                            coordinates: coordinate,
                             city: "Dresden",
+                            coordinates: coordinates,
                             region: region,
                             address: metadata["address"],
                             available: .discrete(available),
