@@ -3,25 +3,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "OpenParkingDresden",
+    name: "Dresden",
     products: [
         .library(
-            name: "OpenParkingDresden",
-            targets: ["OpenParkingDresden"]),
+            name: "Dresden",
+            targets: ["Dresden"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/OpenParkingApp/OpenParkingBase.git", .upToNextMinor(from: "0.5.0")),
+        .package(url: "https://github.com/OpenParkingApp/Datasource.git", .upToNextMinor(from: "0.7.0")),
         .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.2.0"),
     ],
     targets: [
         .target(
-            name: "OpenParkingDresden",
-            dependencies: ["OpenParkingBase", "SwiftSoup"]),
+            name: "Dresden",
+            dependencies: ["Datasource", "SwiftSoup"]),
         .testTarget(
-            name: "OpenParkingDresdenTests",
+            name: "DresdenTests",
             dependencies: [
-                "OpenParkingDresden",
-                .product(name: "OpenParkingTests", package: "OpenParkingBase"),
+                "Dresden",
+                .product(name: "DatasourceValidation", package: "Datasource"),
             ]),
     ]
 )

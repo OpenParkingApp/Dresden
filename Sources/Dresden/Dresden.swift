@@ -1,11 +1,11 @@
 import Foundation
-import OpenParkingBase
+import Datasource
 import SwiftSoup
 
 public class Dresden: Datasource {
     public let name = "Dresden"
     public let slug = "dresden"
-    public let infoUrl = URL(string: "https://www.dresden.de/parken")!
+    public let infoURL = URL(string: "https://www.dresden.de/parken")!
 
     let sourceURL = URL(string: "https://apps.dresden.de/ords/f?p=1110")!
 
