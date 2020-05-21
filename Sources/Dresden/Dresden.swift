@@ -26,7 +26,6 @@ public class Dresden: Datasource {
 
         // Select all tables that have a summary field set (a region identifier).
         let lots = try doc.select("table[summary~=.+]")
-            .filter { try $0.attr("summary") != "Busparkplätze" }
             .map { region in
                 try region.select("tr").compactMap {
                     try extract(lotFrom: $0, region: try region.attr("summary"), dateSource: dateSource)

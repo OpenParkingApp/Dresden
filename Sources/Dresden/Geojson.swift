@@ -18,7 +18,7 @@ let geojson = """
     "properties": {
       "name": "Terrassenufer Bus",
       "address": "Terrassenufer",
-      "type": "lot"
+      "type": "bus"
     }
   }, {
     "type": "Feature",
@@ -734,6 +734,28 @@ let geojson = """
         "name": "Fidelio-F.-Finke-Straße",
         "type": "lot",
         "address": "Fidelio-F.-Finke-Straße"
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [13.7242963, 51.0438375]
+    },
+    "properties": {
+        "name": "Ammonstraße Bus",
+        "type": "bus",
+        "address": "Ammonstraße"
+    }
+  }, {
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [13.7259116, 51.0634933]
+    },
+    "properties": {
+        "name": "Pieschener Allee Bus",
+        "type": "bus",
+        "address": "Pieschener Allee"
     }
   }]
 }
