@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/OpenParkingApp/Datasource.git",
         "state": {
           "branch": null,
-          "revision": "5a37681c6da96d5568e3b1cc42ce249f6d9b2c74",
-          "version": "0.7.0"
+          "revision": "b1c3efff4c5e9670dc5020edd03ee16f9980465d",
+          "version": "0.8.4"
         }
       },
       {
@@ -26,6 +26,15 @@
           "branch": null,
           "revision": "373048cc4084dd7481c86e3bee41612eff93b14d",
           "version": "5.0.0"
+        }
+      },
+      {
+        "package": "Regex",
+        "repositoryURL": "https://github.com/sharplet/Regex",
+        "state": {
+          "branch": null,
+          "revision": "76c2b73d4281d77fc3118391877efd1bf972f515",
+          "version": "2.1.1"
         }
       },
       {
