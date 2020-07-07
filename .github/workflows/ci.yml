@@ -1,11 +1,19 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+    branches: main
 
 jobs:
   test_datasource:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Xcode Version
+      run: |
+        sudo xcode-select --switch /Application/Xcode_12.app
+        xcode-select --print-path
+        xcodebuild --version
     - name: Test Datasource
       run: swift test
