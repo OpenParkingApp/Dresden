@@ -1,7 +1,7 @@
 // This is a workaround until Swift packages properly support resources.
 // swiftlint:disable file_length
 
-import Datasource
+import OpenParking
 import Foundation
 
 // swiftlint:disable:next force_try

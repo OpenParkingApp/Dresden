@@ -1,6 +1,6 @@
 import XCTest
 import Dresden
-import DatasourceValidation
+import OpenParkingTestSupport
 
 final class DresdenTests: XCTestCase {
     func testDatasource() throws {

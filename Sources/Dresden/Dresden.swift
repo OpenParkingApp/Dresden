@@ -1,5 +1,5 @@
 import Foundation
-import Datasource
+import OpenParking
 import SwiftSoup
 
 public class Dresden: Datasource {
