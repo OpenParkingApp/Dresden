@@ -50,6 +50,8 @@ public class Dresden: Datasource {
         }
 
         let lotName = try row.select("td[headers=BEZEICHNUNG]").text()
+
+        let geodata = try self.geodata(from: .module)
         guard let metadata = geodata.lot(withName: lotName) else {
             return .failure(.missingMetadata(lot: lotName))
         }
