@@ -13,6 +13,7 @@ jobs:
       run: |
         sudo xcode-select --switch /Applications/Xcode_12.app
         xcode-select --print-path
-        xcodebuild --version
+        xcodebuild -version
+        swift --version
     - name: Test Datasource
       run: swift test
