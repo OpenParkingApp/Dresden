@@ -3,11 +3,20 @@
     "pins": [
       {
         "package": "AnyCodable",
-        "repositoryURL": "https://github.com/Flight-School/AnyCodable",
+        "repositoryURL": "https://github.com/flight-school/AnyCodable.git",
         "state": {
           "branch": null,
           "revision": "6e9610258e9f1044b5e0d88545052846448b43c3",
           "version": "0.2.3"
+        }
+      },
+      {
+        "package": "GeoJSON",
+        "repositoryURL": "https://github.com/kiliankoe/GeoJSON",
+        "state": {
+          "branch": null,
+          "revision": "18255bc38d88741348199ca03ddc81ae2243fdfb",
+          "version": "0.4.1"
         }
       },
       {
@@ -24,8 +33,8 @@
         "repositoryURL": "https://github.com/OpenParkingApp/OpenParking",
         "state": {
           "branch": null,
-          "revision": "6b5ecea1ec0543791563b26eb9f44116eb4537ff",
-          "version": "0.10.0"
+          "revision": "4aef2cb70a4bc5746d1d2b8168d2c2f639c95598",
+          "version": "0.11.0"
         }
       },
       {

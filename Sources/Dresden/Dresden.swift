@@ -57,15 +57,10 @@ public class Dresden: Datasource {
         }
 
         let available = try row.select("td[headers=FREI]").int(else: 0)
-        let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata.total
+        let capacity = try row.select("td[headers=KAPAZITAET]").int() ?? metadata.properties?.total
 
-        guard let coordinates = metadata.coordinates else {
-            return .failure(.missingMetadataField("coordinates", lot: lotName))
-        }
-
-        let typeStr: String = try metadata.value(for: "type")
-        guard let type = Lot.LotType(rawValue: typeStr) else {
-            throw LotError.other(reason: "Unknown lot type: \(typeStr)")
+        guard let type = metadata.type else {
+            throw LotError.other(reason: "Unknown lot type for \(lotName).")
         }
 
         let detailURLStr = try row.select("a").attr("href")
@@ -73,7 +68,8 @@ public class Dresden: Datasource {
 
         return .success(Lot(dataAge: dateSource,
                             name: lotName,
-                            coordinates: coordinates,
+                            position: metadata.geometry?.center(),
+                            geometry: metadata.geometry,
                             city: self.name,
                             region: region,
                             address: metadata.address,
@@ -82,7 +78,7 @@ public class Dresden: Datasource {
                             state: lotState,
                             type: type,
                             detailURL: detailURL,
-                            imageURL: try? metadata.urlValue(for: "image_url"),
+                            imageURL: metadata.url(for: "image_url"),
                             pricing: Lot.Pricing(url: URL(string: "https://www.dresden.de/apps_ext/HandyParkenApp_de/bookings/booking")!)))
     }
 }

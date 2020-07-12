@@ -4,13 +4,19 @@ import PackageDescription
 
 let package = Package(
     name: "Dresden",
+    platforms: [
+        .macOS(.v10_13),
+        .iOS(.v11),
+        .watchOS(.v4),
+        .tvOS(.v11),
+    ],
     products: [
         .library(
             name: "Dresden",
             targets: ["Dresden"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/OpenParkingApp/OpenParking", .upToNextMinor(from: "0.10.0")),
+        .package(url: "https://github.com/OpenParkingApp/OpenParking", .upToNextMinor(from: "0.11.0")),
         .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.2.0"),
     ],
     targets: [
