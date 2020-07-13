@@ -17,7 +17,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/OpenParkingApp/OpenParking", .upToNextMinor(from: "0.11.0")),
-        .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.2.0"),
+        .package(url: "https://github.com/scinfu/SwiftSoup", from: "2.3.0"),
     ],
     targets: [
         .target(
